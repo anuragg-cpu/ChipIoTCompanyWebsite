@@ -147,12 +147,12 @@ section { padding: 88px 0; }
 .brand svg { width: 34px; height: 34px; }
 .brand-word {
   font-family: var(--font-head);
-  font-size: 1.25rem;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
   color: var(--ink);
 }
-.brand-word b { color: var(--blue); }
+.brand-word b { color: var(--blue); font-weight: 600; }
 .brand-word span { color: var(--orange); }
 
 .nav-links { display: flex; align-items: center; gap: 30px; list-style: none; margin: 0; padding: 0; }
@@ -212,6 +212,19 @@ section { padding: 88px 0; }
 .hero-art .tri {
   position: absolute;
   inset: 0;
+}
+
+.hero-art img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo-section {
+  background-size: cover;
+  background-position: center;
 }
 
 .hero-note {
@@ -327,13 +340,8 @@ section { padding: 88px 0; }
   width: 100%;
   aspect-ratio: 1/1;
   border-radius: var(--radius);
-  background: linear-gradient(160deg, var(--blue), var(--orange));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-family: var(--font-head);
-  font-size: 3.4rem;
+  object-fit: cover;
+  display: block;
   position: relative;
 }
 .founder blockquote {

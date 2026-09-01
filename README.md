@@ -15,7 +15,7 @@ why-us.html          Why Us (4 differentiators)
 contact.html         Contact form + details
 assets/css/style.css Brand system + layout
 assets/js/main.js    Mobile nav toggle + contact form handling
-assets/img/          Favicon
+assets/img/          Favicon + site photography
 ```
 
 Every page shares the same header/nav and footer markup (duplicated per
@@ -37,28 +37,30 @@ ABHAY and links out — there's no local `abhay.html` to maintain.
   language — diagonal section dividers, angled panels in hero/about/why-us
   art, and the nav/footer logo mark.
 
-## On imagery — read before adding photos
+## Imagery
 
-The original build brief called for stock photography (soldering iron,
-breadboard, generic "IoT hologram hand" shots) as placeholders. That's
-exactly the templated-agency look the brief itself flagged as a problem —
-ChipIOT's actual ABHAY product photography is the stronger, more credible
-asset. So rather than ship generic stock:
+`assets/img/` holds the site's real photography (all resized/compressed
+for web — originals ran 190KB–970KB, these are 54KB–160KB):
 
-- Every page currently uses **custom SVG/CSS graphics** built from the
-  brand's own triangle motif and color system instead of photography.
-- The founder section (`about.html`) uses an initials avatar in place of
-  the CEO portrait — swap in the real photo when you have image assets to
-  commit (inline chat images aren't retrievable as files by the agent that
-  built this; they need to be added as real files in a follow-up).
-- The nav/footer logo mark is a hand-recreated approximation of the real
-  ChipIOT two-triangle logo (built from a description, not the actual
-  `logo.png` file — inline chat images can't be saved as files). Replace
-  the inline `<svg>` logo blocks with an `<img src="assets/img/logo.png">`
-  once the real logo file is added to `assets/img/`.
+| File | Used on | Content |
+|---|---|---|
+| `hero-manufacturing.jpg` | Home hero | Laser-cutting a metal panel |
+| `embedded-board.jpg` | Home "About ChipIOT" | Controller board close-up |
+| `iot-connectivity.jpg` | Home + How We Work dark sections (background) | IoT concept shot |
+| `prototyping-breadboard.jpg` | About "Who We Are" | Hand prototyping on a breadboard |
+| `founder-anurag-doshi.jpg` | About founder section | Anurag Doshi, cropped square from the original portrait |
+| `hardware-macro.jpg` | Services "Process" | Controller board with jumper wires |
+| `quality-testing.jpg` | Why Us "Proof, Not Promises" | Multimeter testing an assembly |
 
-To replace a placeholder: add the image to `assets/img/`, then swap the
-relevant `<svg>` block for an `<img>` tag with the same class/positioning.
+The nav/footer logo mark (inline `<svg>` two-triangle icon) is a
+hand-built recreation matching the real ChipIOT logo — inline chat images
+can't be saved as files, so it was redrawn from close visual reference
+rather than traced from the source `logo.png`. If pixel-exact fidelity
+matters (e.g. print use), get the actual `logo.png` into `assets/img/`
+and swap the inline `<svg>` blocks for `<img>` tags.
+
+To swap any image: replace the file in `assets/img/` (same filename) or
+update the `src` in the relevant `<img>` tag.
 
 ## Contact form
 
