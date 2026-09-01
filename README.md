@@ -90,3 +90,30 @@ No build step required. Any static host works:
   directory `/`.
 - **Netlify Forms** activates automatically on Netlify without extra
   configuration, since the form markup is already in place.
+
+### GitHub Pages + www.chipiotembedded.com
+
+This repo is set up to serve at **www.chipiotembedded.com** via GitHub
+Pages. The `CNAME` file at the repo root already declares that domain —
+two things still need doing outside this repo, since neither is
+something a commit can do:
+
+1. **Enable Pages** — repo Settings → Pages → Build and deployment →
+   Source: "Deploy from a branch" → Branch: this repo's default branch,
+   folder `/ (root)` → Save. (Custom domain field should auto-fill from
+   `CNAME`; if not, enter `www.chipiotembedded.com` there too.)
+2. **DNS, at your domain registrar** — add a CNAME record:
+   - Host: `www`
+   - Value: `<github-username>.github.io` (this repo's owner, e.g.
+     `anuragg-cpu.github.io`)
+
+   Optional: to also make the bare `chipiotembedded.com` (no `www`) load
+   the site, add these four `A` records on `@`, pointing at GitHub
+   Pages' IPs — `185.199.108.153`, `185.199.109.153`, `185.199.110.153`,
+   `185.199.111.153` — then in Pages settings enable "Enforce HTTPS"
+   once DNS has propagated (can take up to 24-48h) and set the
+   preferred domain there.
+
+Once DNS resolves, GitHub provisions an HTTPS certificate for the
+domain automatically — no action needed beyond the "Enforce HTTPS"
+checkbox in step 1's settings page.

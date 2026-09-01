@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://chipiotembedded.com/sitemap.xml
+Sitemap: https://www.chipiotembedded.com/sitemap.xml
