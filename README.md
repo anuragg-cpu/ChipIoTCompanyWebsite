@@ -11,7 +11,6 @@ index.html          Home
 about.html           About / company story + founder message
 how-we-work.html     3-step process (Discover → Design & Prototype → Validate & Deliver)
 services.html        5 service cards
-abhay.html           ABHAY product page (flagship)
 why-us.html          Why Us (4 differentiators)
 contact.html         Contact form + details
 assets/css/style.css Brand system + layout
@@ -22,6 +21,12 @@ assets/img/          Favicon
 Every page shares the same header/nav and footer markup (duplicated per
 page, not templated) so the site works from any static host with zero
 build tooling — just point a host at the repo root.
+
+ABHAY has its own subdomain (`abhay.chipiotembedded.com`), so every "ABHAY"
+nav link and CTA across this site (`href="https://abhay.chipiotembedded.com"`,
+`target="_blank"`) points there rather than to a page in this repo. The
+homepage still carries a "Flagship Product" spotlight section that teases
+ABHAY and links out — there's no local `abhay.html` to maintain.
 
 ## Brand system
 
@@ -42,14 +47,15 @@ asset. So rather than ship generic stock:
 
 - Every page currently uses **custom SVG/CSS graphics** built from the
   brand's own triangle motif and color system instead of photography.
-- The ABHAY hero section (`abhay.html`) has a visible placeholder note
-  (`.hero-note`) marking where real device photography from the ABHAY
-  asset library (trifold brochure / digital brochure / pitch deck) should
-  go — that's the one section where real photos will meaningfully help.
 - The founder section (`about.html`) uses an initials avatar in place of
   the CEO portrait — swap in the real photo when you have image assets to
   commit (inline chat images aren't retrievable as files by the agent that
   built this; they need to be added as real files in a follow-up).
+- The nav/footer logo mark is a hand-recreated approximation of the real
+  ChipIOT two-triangle logo (built from a description, not the actual
+  `logo.png` file — inline chat images can't be saved as files). Replace
+  the inline `<svg>` logo blocks with an `<img src="assets/img/logo.png">`
+  once the real logo file is added to `assets/img/`.
 
 To replace a placeholder: add the image to `assets/img/`, then swap the
 relevant `<svg>` block for an `<img>` tag with the same class/positioning.

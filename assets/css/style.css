@@ -11,9 +11,10 @@
   --orange-dark: #D67E00;
   --ink: #12141C;
   --ink-soft: #3A3D4A;
+  --bg: #F1F2F7;
   --paper: #FFFFFF;
-  --paper-soft: #F5F6FB;
-  --line: #E3E5F0;
+  --paper-soft: #E5E8F1;
+  --line: #D9DCE9;
 
   --font-head: "Oswald", "Arial Narrow", sans-serif;
   --font-body: "IBM Plex Mono", "Courier New", monospace;
@@ -31,7 +32,7 @@ body {
   font-size: 16px;
   line-height: 1.65;
   color: var(--ink-soft);
-  background: var(--paper);
+  background: var(--bg);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -129,7 +130,7 @@ section { padding: 88px 0; }
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(255,255,255,0.98);
+  background: rgba(241,242,247,0.96);
   border-bottom: 1px solid var(--line);
 }
 
