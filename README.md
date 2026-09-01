@@ -64,12 +64,16 @@ update the `src` in the relevant `<img>` tag.
 
 ## Contact form
 
-`contact.html` is wired for **Netlify Forms** (`data-netlify="true"` +
-hidden `form-name` field + honeypot field) — if deployed to Netlify, form
-submissions work with no backend code. On any other static host, the form
-still validates client-side and shows a success message, but submissions
-won't be captured until you point `main.js`'s `fetch` call at a real
-form-handling endpoint (Formspree, a serverless function, etc.).
+`contact.html` validates client-side, then hands off to the visitor's own
+email client via a pre-filled `mailto:anuragg@chipiotembedded.com` link
+(subject + body built from the form fields) — this works on any static
+host with zero backend, since the visitor's own client sends the email.
+It's also wired for **Netlify Forms** (`data-netlify="true"` + hidden
+`form-name` field + honeypot field) as a background best-effort capture:
+if deployed to Netlify, submissions are recorded there too, even if the
+visitor closes their mail client without hitting send. Both `main.js`'s
+`CONTACT_EMAIL` constant and the `mailto:` links in each page's footer/
+contact-info need updating together if the address ever changes.
 
 ## SEO
 

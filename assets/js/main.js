@@ -17,9 +17,12 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Contact form: client-side validation + success message.
-  // Wired for Netlify Forms (data-netlify) out of the box; swap the
-  // fetch endpoint below if this site is deployed elsewhere.
+  // Contact form: client-side validation, then hand off to the user's
+  // email client via a pre-filled mailto: link (works with no backend).
+  // Also attempts a Netlify Forms POST in the background when deployed
+  // there, so submissions are captured even if the user closes the
+  // mail client without sending.
+  var CONTACT_EMAIL = "anuragg@chipiotembedded.com";
   var form = document.querySelector(".contact-form");
   if (form) {
     form.addEventListener("submit", function (e) {
@@ -30,20 +33,39 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       var success = document.querySelector(".form-success");
-      var body = new FormData(form);
+      var data = new FormData(form);
+      var name = data.get("name") || "";
+      var email = data.get("email") || "";
+      var company = data.get("company") || "";
+      var projectType = data.get("project_type") || "";
+      var message = data.get("message") || "";
+
+      var subject = "New project inquiry from " + name;
+      var bodyLines = [
+        "Name: " + name,
+        "Email: " + email,
+        "Company: " + (company || "—"),
+        "Project type: " + projectType,
+        "",
+        "Message:",
+        message,
+      ];
+      var mailtoLink =
+        "mailto:" + CONTACT_EMAIL +
+        "?subject=" + encodeURIComponent(subject) +
+        "&body=" + encodeURIComponent(bodyLines.join("\n"));
 
       fetch(form.getAttribute("action") || "/", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(body).toString(),
-      })
-        .catch(function () {
-          /* no backend configured yet in local/dev — still show confirmation */
-        })
-        .finally(function () {
-          form.reset();
-          if (success) success.classList.add("show");
-        });
+        body: new URLSearchParams(data).toString(),
+      }).catch(function () {
+        /* no backend configured yet in local/dev — mailto below still works */
+      });
+
+      window.location.href = mailtoLink;
+      form.reset();
+      if (success) success.classList.add("show");
     });
   }
 });
