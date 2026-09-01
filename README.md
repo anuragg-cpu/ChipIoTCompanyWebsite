@@ -52,12 +52,12 @@ for web — originals ran 190KB–970KB, these are 54KB–160KB):
 | `hardware-macro.jpg` | Services "Process" | Controller board with jumper wires |
 | `quality-testing.jpg` | Why Us "Proof, Not Promises" | Multimeter testing an assembly |
 
-The nav/footer logo mark (inline `<svg>` two-triangle icon) is a
-hand-built recreation matching the real ChipIOT logo — inline chat images
-can't be saved as files, so it was redrawn from close visual reference
-rather than traced from the source `logo.png`. If pixel-exact fidelity
-matters (e.g. print use), get the actual `logo.png` into `assets/img/`
-and swap the inline `<svg>` blocks for `<img>` tags.
+The nav/footer logo mark (inline `<svg>`, viewBox `0 0 422 478`) is
+traced pixel-for-pixel from the real ChipIOT logo file, by scanning the
+source image's color boundaries and reconstructing the exact polygon
+vertices — not a freehand approximation. It's two blue triangles (upper
+and lower half, sharing a flat left edge) plus one orange triangle,
+matching the "two-triangle mark" exactly.
 
 To swap any image: replace the file in `assets/img/` (same filename) or
 update the `src` in the relevant `<img>` tag.
