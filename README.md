@@ -64,16 +64,24 @@ update the `src` in the relevant `<img>` tag.
 
 ## Contact form
 
-`contact.html` validates client-side, then hands off to the visitor's own
-email client via a pre-filled `mailto:anuragg@chipiotembedded.com` link
-(subject + body built from the form fields) — this works on any static
-host with zero backend, since the visitor's own client sends the email.
-It's also wired for **Netlify Forms** (`data-netlify="true"` + hidden
-`form-name` field + honeypot field) as a background best-effort capture:
-if deployed to Netlify, submissions are recorded there too, even if the
-visitor closes their mail client without hitting send. Both `main.js`'s
-`CONTACT_EMAIL` constant and the `mailto:` links in each page's footer/
-contact-info need updating together if the address ever changes.
+`contact.html` validates client-side, then POSTs directly to
+[FormSubmit](https://formsubmit.co) (`https://formsubmit.co/ajax/anuragg@chipiotembedded.com`),
+which emails the submission straight to that inbox — no backend of our
+own, works as-is on GitHub Pages. The AJAX endpoint is used so the page
+never navigates away; `main.js` shows an inline success or error message
+based on the response, and disables the submit button while the request
+is in flight.
+
+**One-time setup:** FormSubmit requires the destination address to be
+activated. The *first* submission ever sent to `anuragg@chipiotembedded.com`
+triggers an activation email from FormSubmit to that inbox — click the
+link in it once, and every submission after that is delivered normally.
+Until it's activated, submissions will appear to succeed on the site but
+won't actually arrive.
+
+If the destination email ever changes, update it in three places: the
+form's `action` in `contact.html`, and the two `mailto:` links (footer +
+contact-info block) on every page.
 
 ## SEO
 

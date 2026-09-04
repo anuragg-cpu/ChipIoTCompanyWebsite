@@ -87,11 +87,14 @@
     </div>
 
     <div>
-      <div class="form-success">Opening your email client with this pre-filled — hit send there to reach us. We'll get back to you shortly.</div>
-      <form class="contact-form" name="contact" method="POST" action="/" data-netlify="true" netlify-honeypot="company-website">
-        <input type="hidden" name="form-name" value="contact">
+      <div class="form-success">Thanks — your message has been sent. We'll get back to you shortly.</div>
+      <div class="form-error">Something went wrong sending that. Please email us directly at <a href="mailto:anuragg@chipiotembedded.com">anuragg@chipiotembedded.com</a>.</div>
+      <form class="contact-form" name="contact" method="POST" action="https://formsubmit.co/anuragg@chipiotembedded.com">
+        <input type="hidden" name="_subject" value="New project inquiry — chipiotembedded.com">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
         <p style="position:absolute; left:-9999px;" aria-hidden="true">
-          <label>Don't fill this out: <input name="company-website" tabindex="-1" autocomplete="off"></label>
+          <label>Don't fill this out: <input name="_honey" tabindex="-1" autocomplete="off"></label>
         </p>
 
         <div class="form-row">

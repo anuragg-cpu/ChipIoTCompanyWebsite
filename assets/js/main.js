@@ -17,12 +17,16 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Contact form: client-side validation, then hand off to the user's
-  // email client via a pre-filled mailto: link (works with no backend).
-  // Also attempts a Netlify Forms POST in the background when deployed
-  // there, so submissions are captured even if the user closes the
-  // mail client without sending.
-  var CONTACT_EMAIL = "anuragg@chipiotembedded.com";
+  // Contact form: client-side validation, then POST straight to
+  // FormSubmit (https://formsubmit.co), which emails the submission to
+  // anuragg@chipiotembedded.com. No backend of our own required — this
+  // works as-is on GitHub Pages. Uses FormSubmit's AJAX endpoint so the
+  // page doesn't navigate away; we show our own success/error state.
+  //
+  // One-time setup: FormSubmit requires the destination address to be
+  // activated. The first submission triggers an activation email to
+  // anuragg@chipiotembedded.com — click the link in it once, and every
+  // submission after that is delivered normally.
   var form = document.querySelector(".contact-form");
   if (form) {
     form.addEventListener("submit", function (e) {
@@ -33,39 +37,36 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       var success = document.querySelector(".form-success");
-      var data = new FormData(form);
-      var name = data.get("name") || "";
-      var email = data.get("email") || "";
-      var company = data.get("company") || "";
-      var projectType = data.get("project_type") || "";
-      var message = data.get("message") || "";
+      var error = document.querySelector(".form-error");
+      var submitBtn = form.querySelector('button[type="submit"]');
+      var actionUrl = form.getAttribute("action");
+      var ajaxUrl = actionUrl.replace(
+        "https://formsubmit.co/",
+        "https://formsubmit.co/ajax/"
+      );
 
-      var subject = "New project inquiry from " + name;
-      var bodyLines = [
-        "Name: " + name,
-        "Email: " + email,
-        "Company: " + (company || "—"),
-        "Project type: " + projectType,
-        "",
-        "Message:",
-        message,
-      ];
-      var mailtoLink =
-        "mailto:" + CONTACT_EMAIL +
-        "?subject=" + encodeURIComponent(subject) +
-        "&body=" + encodeURIComponent(bodyLines.join("\n"));
+      if (error) error.classList.remove("show");
+      if (submitBtn) submitBtn.disabled = true;
 
-      fetch(form.getAttribute("action") || "/", {
+      fetch(ajaxUrl, {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(data).toString(),
-      }).catch(function () {
-        /* no backend configured yet in local/dev — mailto below still works */
-      });
-
-      window.location.href = mailtoLink;
-      form.reset();
-      if (success) success.classList.add("show");
+        headers: { Accept: "application/json" },
+        body: new FormData(form),
+      })
+        .then(function (res) {
+          if (!res.ok) throw new Error("Request failed");
+          return res.json();
+        })
+        .then(function () {
+          form.reset();
+          if (success) success.classList.add("show");
+        })
+        .catch(function () {
+          if (error) error.classList.add("show");
+        })
+        .finally(function () {
+          if (submitBtn) submitBtn.disabled = false;
+        });
     });
   }
 });
